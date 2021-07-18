@@ -1,0 +1,45 @@
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>Environment Data</title>
+  <script src="./dygraph.min.js"></script>
+  <link rel="stylesheet" href="./dygraph.min.css" />
+</head>
+<body>
+<div id="graphdiv2" style="width:900px; height:600px;"></div>
+<div id="textBox0" style="padding:10px; padding-left: 50px;"></div>
+<script type="text/javascript">
+// Save old function
+Dygraph.prototype.parseCSV2_ = Dygraph.prototype.parseCSV_;
+var maxNum=50;
+
+Dygraph.prototype.parseCSV_ = function(data) {
+  // Get all data
+  ret=data.trim().split('\n');
+  lastLine = ret[ret.length-1];
+  console.log(lastLine);
+  lastLine = lastLine.split(",");
+  var s="Date Time: "+lastLine[0]+"<br />\nHumidity: "+lastLine[1]+"%<br />\nTemperature: "+lastLine[2]+"°C<br />\ntVOC: "+lastLine[3]+"<br />\nCO2: "+lastLine[4]+"<br />\n";
+  document.getElementById("textBox0").innerHTML=s;
+  if(ret.length<=maxNum) {
+    // if maxNum is lower than number of lines keep as is
+    var ret = this.parseCSV2_(data);
+  } else {
+    var x = ret.slice(ret.length - maxNum);
+    x.splice(0,0,ret[0]);
+    var ret = this.parseCSV2_(x.join('\n'));
+  }
+  // Return only last maxNum items
+  return ret;
+};
+
+g2 = new Dygraph(
+  document.getElementById("graphdiv2"),
+  "data.csv", // path to CSV file
+  {
+    valueRange: [0,800]
+  } // options
+);
+</script>
+</body>
+</html>
