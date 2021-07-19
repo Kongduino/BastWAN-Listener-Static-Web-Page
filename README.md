@@ -1,6 +1,6 @@
 # BastWAN Listener Static Web Page
 
-See https://kongduino.wordpress.com/2021/07/15/indoors-environment-monitoring-with-lora-part-4/
+See https://kongduino.wordpress.com/2021/07/18/indoors-environment-monitoring-with-lora-part-4/
 
 ## Update 2021/07/19
 
