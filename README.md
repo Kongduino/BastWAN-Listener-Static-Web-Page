@@ -1,6 +1,6 @@
 # BastWAN Listener Static Web Page
 
-See [this blog post](https://kongduino.wordpress.com/2021/07/18/indoors-environment-monitoring-with-lora-part-4/) and [this blog post](https://kongduino.wordpress.com/2021/07/19/indoors-environment-monitoring-with-lora-part-5/)
+See [this blog post](https://kongduino.wordpress.com/2021/07/18/indoors-environment-monitoring-with-lora-part-4/) and [this blog post](https://kongduino.wordpress.com/2021/07/19/indoors-environment-monitoring-with-lora-part-5/) for more information and background on this project.
 
 This is the code for two versions of the same experiment – tracking indoor environment data and storing it for display on a local server – either a Mac's localhost with [this Xojo app](https://github.com/Kongduino/BastWAN-Listener-Xojo) or on a Raspberry Pi with the `dygraphs.py` script. The second version, `twoCharts`, splits the data into two more readable charts, because T/H and tVOC/CO2 have ranges that aren't really compatible.
 
@@ -10,7 +10,7 @@ I have the script running in the background in my crontab:
 @reboot sudo /usr/bin/python3 /home/pi/dygraphs.py /dev/ttyUSB0 &
 ```
 
-There were originally a couple of crashes, but I seem to have caught all the exceptions, and it has been running smoothly since. I have the static page stuff in `/var/www/html/dygraphs`
+There were originally a couple of crashes, but I seem to have caught all the exceptions, and it has been running smoothly since. I have the static page stuff in `/var/www/html/dygraphs`.
 
 ## Update 2021/07/19
 
