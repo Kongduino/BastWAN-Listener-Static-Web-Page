@@ -1,0 +1,53 @@
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>Environment Data</title>
+  <script src="./dygraph.min.js"></script>
+  <link rel="stylesheet" href="./dygraph.min.css" />
+</head>
+<body>
+<div id="graphdivHT" style="width:900px; height:300px;"></div>
+<div id="graphdivVC" style="width:900px; height:300px;"></div>
+<script type="text/javascript">
+// Save old function
+Dygraph.prototype.parseCSV2_ = Dygraph.prototype.parseCSV_;
+var maxNum=400;
+
+Dygraph.prototype.parseCSV_ = function(data) {
+  // Get all data
+  ret=data.trim().split('\n');
+  if(ret.length<=maxNum) {
+    // if maxNum is lower than number of lines keep as is
+    var ret = this.parseCSV2_(data);
+  } else {
+    var x = ret.slice(ret.length - maxNum);
+    x.splice(0,0,ret[0]);
+    var ret = this.parseCSV2_(x.join('\n'));
+  }
+  // Return only last maxNum items
+  return ret;
+};
+
+g0 = new Dygraph(
+  document.getElementById("graphdivHT"),
+  "dataHT.csv", // path to CSV file
+  {
+    valueRange: [0,100],
+    title: 'Humidity / Temperature',
+    strokeWidth: 3,
+    colors: ["red", "blue"]
+  } // options
+);
+g1 = new Dygraph(
+  document.getElementById("graphdivVC"),
+  "dataCV.csv", // path to CSV file
+  {
+    valueRange: [0,1800],
+    title: 'tVOC / CO2',
+    strokeWidth: 3,
+    colors: ["orange", "purple"]
+  } // options
+);
+</script>
+</body>
+</html>
